@@ -116,10 +116,9 @@ Below are three sample queries demonstrating my SQL skills. Additional queries a
 
 ## Acknowledgments
 - Dataset: Kaggle’s Walmart Sales Dataset.
-- Inspiration: A YouTube tutorial on SQL and Python data analysis.
 
 ## Contact
-Explore my other projects on [https://github.com/madhusha3] or connect via [LinkedIn link].
+Explore my other projects on [Follow me for Real World Projects!](https://github.com/madhusha3) or connect via [Connect with me professionally](https://www.linkedin.com/in/madhusudann5397/).
 
 ## License
 MIT License
