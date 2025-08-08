@@ -119,7 +119,7 @@ Below are three sample queries demonstrating my SQL skills. Additional queries a
 - Inspiration: A YouTube tutorial on SQL and Python data analysis.
 
 ## Contact
-Explore my other projects on [GitHub profile link] or connect via [LinkedIn link].
+Explore my other projects on [https://github.com/madhusha3] or connect via [LinkedIn link].
 
 ## License
 MIT License
