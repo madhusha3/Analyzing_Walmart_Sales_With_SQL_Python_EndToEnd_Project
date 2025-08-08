@@ -6,6 +6,7 @@ select count(*) from walmart
 -- 1. Analyze Payment Methods and Sales
 -- Question: What are the different payment methods, and how many transactions and items were sold with each method?
 -- Purpose: This helps understand customer preferences for payment methods, aiding in payment optimization strategies.
+✅Solution:
 SELECT 
 	payment_method,
 	COUNT(*) AS Total_Transactions,
@@ -20,7 +21,7 @@ ORDER BY Total_Items_Sold DESC, Total_Transactions DESC
  -- ● Question: Which category received the highest average rating in each branch?
  -- ● Purpose: This allows Walmart to recognize and promote popular categories in specific
  -- branches, enhancing customer satisfaction and branch-specific marketing.
-
+✅Solution:
  -- Approach: 1:Think in layers — first get averages
 SELECT
 	category, branch,
@@ -33,13 +34,13 @@ GROUP BY category, branch
 -- Think: "For each branch, give me the row where avg_rating is highest."
 -- Using a CTE with ROW_NUMBER()
 
-1HR 02MIN 13 SEC
 ⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 SELECT 	* FROM walmart
 
 -- 3. Determine the Busiest Day for Each Branch
 --  ● Question: What is the busiest day of the week for each branch based on transaction
 --  volume?
+	
 SELECT day_name, SUM(unit_price * quantity) OVER(PARTITION BY BRANCH order b)
 --  ● Purpose: This insight helps in optimizing staffing and inventory management to
 --  accommodate peak days.
@@ -57,11 +58,13 @@ ALTER TABLE walmart ADD COLUMN day_name TEXT;
 UPDATE walmart SET day_name = TO_CHAR(formatted_date, 'Day')
 
 SELECT 	* FROM walmart
+✅Solution 1:
 --Transaction Volume is SUM of the product of unit_price and quantity --> SUM(unit_price * quantity)
 SELECT column_name, data_type
 FROM information_schema.columns
 WHERE table_name = 'walmart';
 
+✅Solution 2:
 -- super easy solution assuming Transaction Volume as Count of Invoice_id as its unique
 WITH counts AS(
 SELECT 
@@ -80,6 +83,7 @@ SELECT branch, day_name, transaction_count
 FROM ranked
 WHERE rnk = 1
 
+✅Solution 3:
 --super easy solution assuming Transaction Volume as SUM(unit_price * quantity)
 WITH counts AS (
     SELECT branch, day_name, SUM(CAST(REPLACE(unit_price, '$', '') AS DOUBLE PRECISION) * quantity) AS transaction_volume
@@ -98,16 +102,20 @@ SELECT branch, day_name, transaction_volume
 FROM ranked
 WHERE rnk = 1
 
+⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 -- Q4. Calculate the total quantity of items sold per payment method. List payment_method and total _ quantity.
 SELECT 	* FROM walmart
 
+✅Solution:
 SELECT SUM(quantity) AS Total_Quantity, payment_method
 FROM walmart
 GROUP BY payment_method
 
+⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 -- Q5: Determine the average, minimum, and maximum rating Of products for each city.
 -- List the city, average _ rating, min_rating, and max_rating.
 SELECT 	* FROM walmart
+✅Solution:
 SELECT
 	city,
 	category,
@@ -117,11 +125,12 @@ SELECT
 FROM walmart
 GROUP BY city, category;
 
+⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 -- Q6: Calculate the total profit for each category by considering total _ profit as
 -- (unit _ price * quantity * profit _ margin).
 -- List category and total _ profit, Ordered from highest to lowest profit.
 SELECT 	* FROM walmart
-
+✅Solution:
 SELECT 
 	category,
 	SUM(CAST(REPLACE(unit_price, '$', '') AS DOUBLE PRECISION) * quantity * profit_margin) AS total_profit
@@ -129,8 +138,11 @@ FROM walmart
 GROUP BY category
 ORDER BY total_profit DESC
 
+⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 -- Q7: Determine the most common payment method for each Branch. Display Branch and the preferred_payment_method.
 SELECT 	* FROM walmart
+
+✅Solution:
 --count the occurances of different payment methods
 WITH payment_counts AS (
     SELECT 
@@ -153,6 +165,7 @@ SELECT
 FROM ranked
 WHERE rnk = 1;
 
+⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 -- Q8: Categorize sales into 3 group MORNING, AFTERNOON, EVENING Find out each of the shift and number of invoices
 SELECT 	* FROM walmart
 
@@ -161,6 +174,7 @@ SELECT
 	time::time
 FROM walmart
 
+✅Solution 1:
 Approach 1: 
 SELECT 
 	CASE
@@ -172,6 +186,7 @@ SELECT
 FROM walmart
 GROUP BY shift
 
+✅Solution 2:
 Appraoch 2: 
 SELECT
 	CASE
@@ -183,10 +198,12 @@ SELECT
 FROM walmart
 GROUP BY shift
 
+⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️⏭️
 -- #9 Identify 5 branch with highest decrease ratio in revevenue compare to last year 
 --(current year 2023 and last year 2022)
 SELECT 	* FROM walmart
 
+✅Solution:
 WITH rev_2022 AS (
     -- Revenue for 2022 per branch
     SELECT 
@@ -228,3 +245,4 @@ FROM combined
 WHERE decrease_ratio IS NOT NULL AND decrease_ratio > 0
 ORDER BY decrease_ratio DESC
 LIMIT 5;
+
