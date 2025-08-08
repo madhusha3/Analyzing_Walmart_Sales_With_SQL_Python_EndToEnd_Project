@@ -1,7 +1,7 @@
 # Walmart Sales Data Analysis: SQL and Python Pipeline
 
 ## Overview
-This project is an end-to-end data analysis pipeline built to extract insights from Walmart sales data, inspired by a YouTube tutorial. Using Python for data preprocessing and SQL for querying, I honed skills in data cleaning, database management, and business problem-solving. I wrote nine SQL queries to analyze sales trends, customer behavior, and profitability, applying advanced techniques like CTEs and window functions to address real-world retail challenges.
+This project is an end-to-end data analysis pipeline built to extract insights from Walmart sales data. Using Python for data preprocessing and SQL for querying, I honed skills in data cleaning, database management, and business problem-solving. I wrote nine SQL queries to analyze sales trends, customer behavior, and profitability, applying advanced techniques like CTEs and window functions to address real-world retail challenges.
 
 ## Dataset
 The dataset, sourced from Kaggle’s Walmart Sales Dataset, includes a `walmart` table with columns like `invoice_id`, `branch`, `category`, `unit_price`, `quantity`, `payment_method`, `rating`, and `date`. It captures retail transactions across multiple branches. I explored the schema and loaded the data into PostgreSQL for analysis.
